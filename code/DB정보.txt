@@ -1,0 +1,29 @@
+<-------------------import---------------------->
+
+바탕화면에 input_sql.dmp를 넣고
+
+<system 계정>
+GRANT CREATE ANY DIRECTORY TO ryan;
+
+<ryan 계정>
+CREATE DIRECTORY dump_dir AS 'C:\Users\admin\Desktop';
+
+
+< sqlplus 벗어나서 >
+impdp ryan/1234@XE directory=dump_dir dumpfile=input_sql.dmp TABLE_EXISTS_ACTION=REPLACE
+
+
+
+
+<--------------------export------------------------->
+
+< system 계정 >
+GRANT CREATE ANY DIRECTORY TO ryan;
+
+< ryan 계정 >
+CREATE DIRECTORY dump_dir AS 'C:\Users\YourUsername\Desktop';
+
+< sqlplus 벗어나서 >
+expdp ryan/1234@XE directory=dump_dir dumpfile=input_sql.dmp FULL=Y
+
+바탕화면에  imput_sql.dmp 파일이 생성됩니다.
